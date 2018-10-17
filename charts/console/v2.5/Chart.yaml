@@ -1,0 +1,13 @@
+name: twistlock-console
+version: 0.1.0
+appVersion: 2.5.127
+description: Twistlock Console
+icon: https://www.twistlock.com/wp-content/uploads/2017/08/Twistlock_Logo-Mark_RGB.jpg
+keywords:
+home: http://www.twistlock.com/
+sources:
+- https://github.com/oats87/twistlock-charts
+maintainers:
+- name: Chris Kim
+  email: chriskim@rancher.com
+engine: gotpl

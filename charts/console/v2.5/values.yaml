@@ -1,0 +1,8 @@
+image:
+  repository: registry-auth.twistlock.com/<AUTH-TOKEN>/twistlock/console
+  tag: console_2_5_127
+  pullPolicy: Always
+ingress:
+  enabled: true
+  hosts:
+  - name: wordpress.local

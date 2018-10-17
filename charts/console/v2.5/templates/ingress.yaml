@@ -1,0 +1,27 @@
+{{- if .Values.ingress.enabled }}
+{{- range .Values.ingress.hosts }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "{{ $.Release.Name }}-ingress"
+  labels:
+    app: {{ template "fullname" $ }}
+    chart: "{{ $.Chart.Name }}-{{ $.Chart.Version }}"
+    release: "{{ $.Release.Name }}"
+    heritage: "{{ $.Release.Service }}"
+  annotations:
+    spec:
+      rules:
+      - host: {{ .name }}
+        http:
+          paths:
+          - path: {{ default "" .path }}
+            backend:
+              serviceName: {{ template "fullname" $ }}
+              servicePort: 8081
+      tls:
+      - hosts:
+        - {{ .name }}
+---
+{{- end }}
+{{- end }}
