@@ -10,15 +10,15 @@ metadata:
     release: "{{ $.Release.Name }}"
     heritage: "{{ $.Release.Service }}"
   annotations:
-  spec:
-    rules:
-    - host: {{ .name }}
-      http:
-        paths:
-        - path: {{ default "" .path }}
-          backend:
-            serviceName: {{ template "fullname" $ }}
-            servicePort: 8081
+spec:
+  rules:
+  - host: {{ .name }}
+    http:
+      paths:
+      - path: {{ default "" .path }}
+        backend:
+          serviceName: {{ template "fullname" $ }}
+          servicePort: 8081
 ---
 {{- end }}
 {{- end }}
