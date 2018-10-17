@@ -16,5 +16,5 @@ spec:
   - name: mgmt-http
     port: 8081
   selector:
-    name: {{ template "fullname" . }}
+    app: {{ template "fullname" . }}
   type: ClusterIP
