@@ -10,7 +10,6 @@ metadata:
     release: "{{ $.Release.Name }}"
     heritage: "{{ $.Release.Service }}"
   annotations:
-    ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   rules:
   - host: {{ .name }}
@@ -19,7 +18,10 @@ spec:
       - path: {{ default "/" .path }}
         backend:
           serviceName: {{ template "fullname" $ }}
-          servicePort: 8083
+          servicePort: 8081
+  tls:
+  - hosts:
+    - {{ .name }}
 ---
 {{- end }}
 {{- end }}
