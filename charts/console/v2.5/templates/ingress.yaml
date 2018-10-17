@@ -19,6 +19,9 @@ spec:
         backend:
           serviceName: {{ template "fullname" $ }}
           servicePort: 8081
+    tls:
+    - hosts:
+      - {{ .name }}
 ---
 {{- end }}
 {{- end }}
