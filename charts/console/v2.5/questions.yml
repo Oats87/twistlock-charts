@@ -3,12 +3,17 @@ categories:
 questions:
 - variable: defaultImage
   default: "false"
-  description: "Use default Docker image"
+  description: "Use default Docker image from Twistlock"
   label: Use Default Image
   type: boolean
   show_subquestion_if: false
   group: "Container Images"
   subquestions:
+  - variable: image.auth_token
+    default: ""
+    description: "Twistlock Console Image Auth Token"
+    type: string
+    label: Twistlock Auth Token
   - variable: image.repository
     default: "registry-auth.twistlock.com/<AUTH-TOKEN>/twistlock/console"
     description: "Twistlock Console image name"
