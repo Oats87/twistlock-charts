@@ -11,6 +11,8 @@ persistence:
   storageClass: default
   #labels: []
   # bindHost:
+  bindHostEnabled: false
+  #bindHost:
 service:
   loadBalancer:
     enabled: false

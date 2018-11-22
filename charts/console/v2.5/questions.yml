@@ -42,13 +42,26 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Docker Registry
-- variable: persistence.bindHost
-  description: "(Optional) Choose a host to create a bind mount on for local storage"
-  type: hostname
-  default: null
+- variable: persistence.bindHostEnabled
   show_if: "persistence.enabled=false"
+  description: "Enable local storage (hostPath) persistence for Twistlock Console"
+  label: Enable local storage (hostPath) persistence for Twistlock Console
+  type: boolean
+  default: "false"
+  show_subquestion_if: "persistence.bindHostEnabled=true"
+- subquestions:
+  - variable: persistence.bindHost
+    description: "(Optional) Choose a host to create a bind mount on for local storage"
+    type: hostname
+    default: ""
+    group: "Settings"
+    label: Bind Host to create hostPath on
+- variable: nodeSelector
+  description: "(Optional) Node Selector for Twistlock Console"
+  type: string
+  default: ""
+  label: "(Optional) Node Selector for Twistlock Console"
   group: "Settings"
-  label: Bind Host to create hostPath on
 - variable: service.ingress.enabled
   default: "true"
   description: "Expose Twistlock Console using Layer 7 Load Balancer - ingress"

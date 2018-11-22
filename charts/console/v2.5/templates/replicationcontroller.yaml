@@ -76,16 +76,20 @@ spec:
           subPath: "var/lib/twistlock-backup"
         - name: syslog-socket
           mountPath: "/dev/log"
-{{- if (.Values.persistence.bindHost) }}
+{{- if or (.Values.persistence.bindHostEnabled) (.Values.nodeSelector) }}
       nodeSelector:
+{{- if .Values.persistence.bindHost }}
         kubernetes.io/hostname: {{ .Values.persistence.bindHost }}
+{{- else if .Values.nodeSelector }}
+{{ toYaml .Values.nodeSelector | indent 8 }}
+{{- end }}
 {{- end }}
       volumes:
       - name: console-persistent-volume
 {{- if (.Values.persistence.enabled) }}
         persistentVolumeClaim:
           claimName: {{ template "fullname" . }}
-{{- else if .Values.persistence.bindHost }}
+{{- else if .Values.persistence.bindHostEnabled }}
         hostPath:
           path: "/"
 {{- else }}
