@@ -48,8 +48,8 @@ questions:
   label: Enable local storage (hostPath) persistence for Twistlock Console
   type: boolean
   default: "false"
-  show_subquestion_if: "persistence.bindHostEnabled=true"
-- subquestions:
+  show_subquestion_if: true
+  subquestions:
   - variable: persistence.bindHost
     description: "(Optional) Choose a host to create a bind mount on for local storage (kubernetes.io/hostname)"
     type: string
