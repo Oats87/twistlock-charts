@@ -54,7 +54,6 @@ questions:
     description: "(Optional) Choose a host to create a bind mount on for local storage (kubernetes.io/hostname)"
     type: string
     default: ""
-    group: "Settings"
     label: "kubernetes.io/hostname Bind Host to create hostPath on"
 - variable: nodeSelector
   description: "(Optional) Node Selector for Twistlock Console"
