@@ -9,28 +9,28 @@ questions:
   options:
     - "Twistlock"
     - "Private Registry"
-  group: "Container Images"
+  group: "Container Image"
 - variable: image.accessToken
   default: ""
   description: "Twistlock Access Token"
   type: string
   label: Twistlock Access Token
   show_if: "image.source=Twistlock"
-  group: "Container Images"
+  group: "Container Image"
 - variable: image.image
   default: ""
   description: "Twistlock Console Image"
   type: string
   label: Twistlock Private Registry Image
   show_if: "image.source=Private Registry"
-  group: "Container Images"
+  group: "Container Image"
 - variable: persistence.enabled
   default: false
   description: "Enable persistent volume for TwistLock Console"
   type: boolean
   label: Twistlock Console Persistent Volume Enabled
   show_subquestion_if: true
-  group: "Settings"
+  group: "Persistence"
   subquestions:
   - variable: persistence.size
     default: "100Gi"
@@ -49,6 +49,7 @@ questions:
   type: boolean
   default: false
   show_subquestion_if: true
+  group: "Persistence"
   subquestions:
   - variable: persistence.bindHost
     description: "(Optional) Choose a host to create a bind mount on for local storage (kubernetes.io/hostname)"
@@ -67,7 +68,7 @@ questions:
   type: boolean
   label: Expose app using Layer 7 Load Balancer
   show_subquestion_if: true
-  group: "Ingress"
+  group: "Services and Ingress"
   subquestions:
   - variable: service.ingress.host
     default: "xip.io"
@@ -81,7 +82,7 @@ questions:
   type: boolean
   label: Expose app using a Cluster IP Service
   show_subquestion_if: true
-  group: "ClusterIP Service"
+  group: "Services and Ingress"
   subquestions:
   - variable: service.clusterIP.ip
     description: "(Optional) Desired Cluster IP"
@@ -92,7 +93,7 @@ questions:
   description: "Expose Twistlock Console using Layer 4 Load Balancer"
   type: boolean
   label: Expose app using Layer 4 Load Balancer
-  group: "L4 Load Balancer Service"
+  group: "Services and Ingress"
 - variable: service.nodePort.enabled
   default: "false"
   description: "Expose Twistlock Console using a NodePort"
