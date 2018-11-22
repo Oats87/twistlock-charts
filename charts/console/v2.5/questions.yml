@@ -101,4 +101,4 @@ questions:
   description: "Expose Twistlock Console using a NodePort"
   type: boolean
   label: Expose app using a NodePort
-  group: "NodePort Service"
+  group: "Services and Ingress"
