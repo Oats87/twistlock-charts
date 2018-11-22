@@ -44,9 +44,10 @@ questions:
     label: Default StorageClass for Docker Registry
 - variable: persistence.bindHost
   description: "Choose a host to create a bind mount on for local storage"
-  type: hostname
+  type: string
   show_if: "persistence.enabled=false"
   group: "Settings"
+  label: Bind Host to create hostPath on
 - variable: service.ingress.enabled
   default: "true"
   description: "Expose Twistlock Console using Layer 7 Load Balancer - ingress"
@@ -71,7 +72,7 @@ questions:
   subquestions:
   - variable: service.clusterIP.ip
     description: "Desired Cluster IP"
-    type: text
+    type: string
     label: Desired Cluster IP
 - variable: service.loadBalancer.enabled
   default: "false"
