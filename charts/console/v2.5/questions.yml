@@ -44,7 +44,8 @@ questions:
     label: Default StorageClass for Docker Registry
 - variable: persistence.bindHost
   description: "(Optional) Choose a host to create a bind mount on for local storage"
-  type: string
+  type: hostname
+  default: null
   show_if: "persistence.enabled=false"
   group: "Settings"
   label: Bind Host to create hostPath on
