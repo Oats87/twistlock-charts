@@ -52,8 +52,9 @@ questions:
   group: "Persistence"
   subquestions:
   - variable: persistence.bindHost
-    description: "(Optional) Choose a host to create a bind mount on for local storage (kubernetes.io/hostname)"
+    description: "Choose a host to create a bind mount on for local storage (kubernetes.io/hostname)"
     type: string
+    required: true
     default: ""
     label: "kubernetes.io/hostname Bind Host to create hostPath on"
 - variable: nodeSelector
