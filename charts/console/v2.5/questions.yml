@@ -33,7 +33,7 @@ questions:
   group: "Settings"
   subquestions:
   - variable: persistence.size
-    default: "25Gi"
+    default: "100Gi"
     description: "Twistlock Console Persistent Volume Size"
     type: string
     label: Twistlock Console Volume Size
@@ -42,7 +42,12 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Docker Registry
-- variable: ingress.enabled
+- variable: persistence.bindHost
+  description: "Choose a host to create a bind mount on for local storage"
+  type: hostname
+  show_if: "persistence.enabled=false"
+  group: "Settings"
+- variable: service.ingress.enabled
   default: "true"
   description: "Expose Twistlock Console using Layer 7 Load Balancer - ingress"
   type: boolean
@@ -50,9 +55,33 @@ questions:
   show_subquestion_if: true
   group: "Services and Load Balancing"
   subquestions:
-  - variable: ingress.host
+  - variable: service.ingress.host
     default: "xip.io"
     description: "Hostname to your Twistlock Console installation"
     type: hostname
     required: true
     label: Hostname
+- variable: service.ingress.clusterIP
+  default: "true"
+  description: "Expose Twistlock Console using a ClusterIP Service"
+  type: boolean
+  label: Expose app using a Cluster IP Service
+  show_subquestion_if: true
+  group: "Services and Load Balancing"
+  subquestions:
+  - variable: service.clusterIP.ip
+    description: "Desired Cluster IP"
+    type: text
+    label: Desired Cluster IP
+- variable: service.loadBalancer.enabled
+  default: "false"
+  description: "Expose Twistlock Console using Layer 4 Load Balancer"
+  type: boolean
+  label: Expose app using Layer 4 Load Balancer
+  group: "Services and Load Balancing"
+- variable: service.nodePort.enabled
+  default: "false"
+  description: "Expose Twistlock Console using a NodePort"
+  type: boolean
+  label: Expose app using a NodePort
+  group: "Services and Load Balancing"
