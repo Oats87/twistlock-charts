@@ -26,7 +26,7 @@ spec:
       containers:
       - name: {{ template "fullname" . }}
 {{- if and (.Values.image.source) (eq .Values.image.source "Twistlock") }}
-        image: "registry-auth.twistlock.com/{{ .Values.image.authToken }}/twistlock/console:console_2_5_127"
+        image: "registry-auth.twistlock.com/tw_{{ .Values.image.accessToken }}/twistlock/console:console_2_5_127"
 {{- else }}
         image: {{ .Values.image.image | quote }}
 {{- end }}

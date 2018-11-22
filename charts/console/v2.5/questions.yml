@@ -2,7 +2,7 @@ categories:
 - Security
 questions:
 - variable: image.source
-  default: "twistlock"
+  default: "Twistlock"
   description: "Image Source"
   label: Use Twistlock Auth Registry Image
   type: enum
@@ -10,18 +10,20 @@ questions:
     - "Twistlock"
     - "Private Registry"
   group: "Container Images"
-- variable: image.authToken
+- variable: image.accessToken
   default: ""
-  description: "Twistlock Console Image Auth Token"
+  description: "Twistlock Access Token"
   type: string
-  label: Twistlock Auth Token
+  label: Twistlock Access Token
   show_if: "image.source=Twistlock"
+  group: "Container Images"
 - variable: image.image
   default: ""
   description: "Twistlock Console Image"
   type: string
   label: Twistlock Private Registry Image
   show_if: "image.source=Private Registry"
+  group: "Container Images"
 - variable: persistence.enabled
   default: false
   description: "Enable persistent volume for TwistLock Console"
