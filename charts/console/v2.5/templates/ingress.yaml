@@ -1,5 +1,4 @@
-{{- if .Values.ingress.enabled }}
-{{- range .Values.ingress.hosts }}
+{{- if .Values.service.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -12,16 +11,15 @@ metadata:
   annotations:
 spec:
   rules:
-  - host: {{ .name }}
+  - host: {{ .Values.service.ingress.host }}
     http:
       paths:
-      - path: {{ default "/" .path }}
+      - path: /
         backend:
           serviceName: {{ template "fullname" $ }}
           servicePort: 8081
   tls:
   - hosts:
-    - {{ .name }}
+    - {{ .Values.service.ingress.host }}
 ---
-{{- end }}
 {{- end }}

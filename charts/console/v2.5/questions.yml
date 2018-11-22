@@ -1,29 +1,45 @@
 categories:
 - Security
 questions:
-- variable: defaultImage
-  default: "false"
-  description: "Use default Docker image from Twistlock"
-  label: Use Default Image
-  type: boolean
-  show_subquestion_if: false
+- variable: image.source
+  default: "twistlock"
+  description: "Image Source"
+  label: Use Twistlock Auth Registry Image
+  type: enum
+  options:
+    - "Twistlock"
+    - "Private Registry"
   group: "Container Images"
+- variable: image.authToken
+  default: ""
+  description: "Twistlock Console Image Auth Token"
+  type: string
+  label: Twistlock Auth Token
+  show_if: "image.source=Twistlock"
+- variable: image.image
+  default: ""
+  description: "Twistlock Console Image"
+  type: string
+  label: Twistlock Private Registry Image
+  show_if: "image.source=Private Registry"
+- variable: persistence.enabled
+  default: false
+  description: "Enable persistent volume for TwistLock Console"
+  type: boolean
+  label: Twistlock Console Persistent Volume Enabled
+  show_subquestion_if: true
+  group: "Settings"
   subquestions:
-  - variable: image.auth_token
+  - variable: persistence.size
+    default: "25Gi"
+    description: "Twistlock Console Persistent Volume Size"
+    type: string
+    label: Twistlock Console Volume Size
+  - variable: persistence.storageClass
     default: ""
-    description: "Twistlock Console Image Auth Token"
-    type: string
-    label: Twistlock Auth Token
-  - variable: image.repository
-    default: "registry-auth.twistlock.com/<AUTH-TOKEN>/twistlock/console"
-    description: "Twistlock Console image name"
-    type: string
-    label: Twistlock Console Image Name
-  - variable: image.tag
-    default: "console_2_5_127"
-    description: "Twistlock Console image tag"
-    type: string
-    label: Image Tag
+    description: "If undefined or null, uses the default StorageClass. Default to null"
+    type: storageclass
+    label: Default StorageClass for Docker Registry
 - variable: ingress.enabled
   default: "true"
   description: "Expose Twistlock Console using Layer 7 Load Balancer - ingress"
@@ -32,7 +48,7 @@ questions:
   show_subquestion_if: true
   group: "Services and Load Balancing"
   subquestions:
-  - variable: ingress.hosts[0].name
+  - variable: ingress.host
     default: "xip.io"
     description: "Hostname to your Twistlock Console installation"
     type: hostname

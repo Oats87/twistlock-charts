@@ -1,8 +1,24 @@
 image:
-  repository: registry-auth.twistlock.com/<AUTH-TOKEN>/twistlock/console
-  tag: console_2_5_127
+  source: twistlock
+  # image:
   pullPolicy: Always
-ingress:
-  enabled: true
-  hosts:
-  - name: wordpress.local
+  pullSecrets: []
+  # - name: secretName
+persistence:
+  enabled: false
+  type: pvc
+  size: 25
+  storageClass: default
+  #labels: []
+  # bindHost:
+service:
+  loadBalancer:
+    enabled: false
+  clusterIP:
+    enabled: false
+    #ip:
+  nodePort:
+    enabled: false
+  ingress:
+    enabled: false
+    host: twistlock.default.svc

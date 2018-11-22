@@ -17,11 +17,19 @@ spec:
       labels:
         app: {{ template "fullname" . }}
     spec:
+{{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 6 }}
+{{- end }}
       restartPolicy: Always
       serviceAccountName: {{ template "fullname" . }}
       containers:
       - name: {{ template "fullname" . }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+{{- if and (.Values.image.source) (eq .Values.image.source "Twistlock") }}
+        image: "registry-auth.twistlock.com/{{ .Values.image.authToken }}/twistlock/console:console_2_5_127"
+{{- else }}
+        image: {{ .Values.image.image | quote }}
+{{- end }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         ports:
         - name: mgmt-https
@@ -68,10 +76,21 @@ spec:
           subPath: "var/lib/twistlock-backup"
         - name: syslog-socket
           mountPath: "/dev/log"
+{{- if (.Values.persistence.bindHost) }}
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.persistence.bindHost }}
+{{- end }}
       volumes:
       - name: console-persistent-volume
+{{- if (.Values.persistence.enabled) }}
         persistentVolumeClaim:
           claimName: {{ template "fullname" . }}
+{{- else if .Values.persistence.bindHost }}
+        hostPath:
+          path: "/"
+{{- else }}
+        emptyDir: {}
+{{- end }}
       - name: syslog-socket
         hostPath:
           path: "/dev/log"
