@@ -70,7 +70,7 @@ questions:
   type: boolean
   label: Expose app using Layer 7 Load Balancer
   show_subquestion_if: true
-  group: "Services and Ingress"
+  group: "Ingress"
   subquestions:
   - variable: service.ingress.host
     default: "xip.io"
@@ -84,7 +84,7 @@ questions:
   type: boolean
   label: Expose app using a Cluster IP Service
   show_subquestion_if: true
-  group: "Services and Ingress"
+  group: "Cluster IP"
   subquestions:
   - variable: service.clusterIP.ip
     description: "(Optional) Desired Cluster IP"
@@ -95,10 +95,10 @@ questions:
   description: "Expose Twistlock Console using Layer 4 Load Balancer"
   type: boolean
   label: Expose app using Layer 4 Load Balancer
-  group: "Services and Ingress"
+  group: "Services"
 - variable: service.nodePort.enabled
   default: "false"
   description: "Expose Twistlock Console using a NodePort"
   type: boolean
   label: Expose app using a NodePort
-  group: "Services and Ingress"
+  group: "Services"
