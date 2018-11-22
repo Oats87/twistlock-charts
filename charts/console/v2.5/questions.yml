@@ -45,9 +45,9 @@ questions:
 - variable: persistence.bindHostEnabled
   show_if: "persistence.enabled=false"
   description: "Enable local storage (hostPath) persistence for Twistlock Console"
-  label: Enable local storage (hostPath) persistence for Twistlock Console
+  label: "Enable local storage (hostPath) persistence for Twistlock Console"
   type: boolean
-  default: "false"
+  default: false
   show_subquestion_if: true
   subquestions:
   - variable: persistence.bindHost
@@ -55,7 +55,7 @@ questions:
     type: string
     default: ""
     group: "Settings"
-    label: kubernetes.io/hostname Bind Host to create hostPath on
+    label: "kubernetes.io/hostname Bind Host to create hostPath on"
 - variable: nodeSelector
   description: "(Optional) Node Selector for Twistlock Console"
   type: string
