@@ -58,10 +58,10 @@ questions:
     default: ""
     label: "kubernetes.io/hostname Bind Host to create hostPath on"
 - variable: nodeSelector
-  description: "(Optional) Node Selector for Twistlock Console"
+  description: "Node Selector for Twistlock Console in format 'kubernetes.io/hostname: mynode'"
   type: string
   default: ""
-  label: "(Optional) Node Selector for Twistlock Console"
+  label: "(Optional) Node Selector for Twistlock Console in format like 'kubernetes.io/hostname: mynode'"
   group: "Settings"
   show_if: "persistence.bindHostEnabled=false"
 - variable: service.ingress.enabled

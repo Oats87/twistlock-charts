@@ -81,7 +81,7 @@ spec:
 {{- if .Values.persistence.bindHost }}
         kubernetes.io/hostname: {{ .Values.persistence.bindHost }}
 {{- else if .Values.nodeSelector }}
-{{ toYaml .Values.nodeSelector | indent 8 }}
+        {{ .Values.nodeSelector }}
 {{- end }}
 {{- end }}
       volumes:
