@@ -43,7 +43,7 @@ questions:
     type: storageclass
     label: Default StorageClass for Docker Registry
 - variable: persistence.bindHost
-  description: "Choose a host to create a bind mount on for local storage"
+  description: "(Optional) Choose a host to create a bind mount on for local storage"
   type: string
   show_if: "persistence.enabled=false"
   group: "Settings"
@@ -54,7 +54,7 @@ questions:
   type: boolean
   label: Expose app using Layer 7 Load Balancer
   show_subquestion_if: true
-  group: "Services and Load Balancing"
+  group: "Ingress"
   subquestions:
   - variable: service.ingress.host
     default: "xip.io"
@@ -68,10 +68,10 @@ questions:
   type: boolean
   label: Expose app using a Cluster IP Service
   show_subquestion_if: true
-  group: "Services and Load Balancing"
+  group: "ClusterIP Service"
   subquestions:
   - variable: service.clusterIP.ip
-    description: "Desired Cluster IP"
+    description: "(Optional) Desired Cluster IP"
     type: string
     label: Desired Cluster IP
 - variable: service.loadBalancer.enabled
@@ -79,10 +79,10 @@ questions:
   description: "Expose Twistlock Console using Layer 4 Load Balancer"
   type: boolean
   label: Expose app using Layer 4 Load Balancer
-  group: "Services and Load Balancing"
+  group: "L4 Load Balancer Service"
 - variable: service.nodePort.enabled
   default: "false"
   description: "Expose Twistlock Console using a NodePort"
   type: boolean
   label: Expose app using a NodePort
-  group: "Services and Load Balancing"
+  group: "NodePort Service"
