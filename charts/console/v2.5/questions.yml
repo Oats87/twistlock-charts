@@ -63,6 +63,7 @@ questions:
   default: ""
   label: "(Optional) Node Selector for Twistlock Console"
   group: "Settings"
+  show_if: "persistence.bindHostEnabled=false"
 - variable: service.ingress.enabled
   default: "true"
   description: "Expose Twistlock Console using Layer 7 Load Balancer - ingress"
