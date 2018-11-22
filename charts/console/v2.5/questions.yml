@@ -51,11 +51,11 @@ questions:
   show_subquestion_if: "persistence.bindHostEnabled=true"
 - subquestions:
   - variable: persistence.bindHost
-    description: "(Optional) Choose a host to create a bind mount on for local storage"
-    type: hostname
+    description: "(Optional) Choose a host to create a bind mount on for local storage (kubernetes.io/hostname)"
+    type: string
     default: ""
     group: "Settings"
-    label: Bind Host to create hostPath on
+    label: kubernetes.io/hostname Bind Host to create hostPath on
 - variable: nodeSelector
   description: "(Optional) Node Selector for Twistlock Console"
   type: string
